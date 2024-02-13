@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Step extends org.deliveroo.cronexpressionparser.selectors.Base {
+public class Step extends SelectorBase {
 
     public Step(FieldBase field) {
         super(field);

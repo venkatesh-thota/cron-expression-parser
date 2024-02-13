@@ -1,13 +1,15 @@
 package org.deliveroo.cronexpressionparser.fields;
 
+import org.deliveroo.cronexpressionparser.selectors.SelectorBase;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-public abstract class FieldBase<T> {
+public abstract class FieldBase {
     Integer min;
     Integer max;
     String expression;
-    List<T> possibilities;
+    List possibilities;
 
     public FieldBase(String expression) {
         this.expression = expression;
@@ -25,9 +27,9 @@ public abstract class FieldBase<T> {
         return expression;
     }
 
-    public List<T> parse()
+    public List<Integer> parse()
             throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        this.possibilities = (List<T>) org.deliveroo.cronexpressionparser.selectors.Base.get(this).generatePossibilities();
+        this.possibilities =  SelectorBase.get(this).generatePossibilities();
         return this.possibilities;
     }
 }

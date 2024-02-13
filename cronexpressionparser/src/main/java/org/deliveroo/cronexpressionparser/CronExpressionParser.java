@@ -14,7 +14,7 @@ public class CronExpressionParser {
     static Map<String, String> displayString = Map
             .of("day", "day of month", "weekday", "day of week");
     String expression;
-    HashMap<String, List> fieldsMap;
+    HashMap<String, List<Integer>> fieldsMap;
     String command;
 
     CronExpressionParser(String expression)
@@ -29,8 +29,10 @@ public class CronExpressionParser {
         if (args.length != 1) {
             throw new RuntimeException("There should be 1 argument : " + String.join(";", args));
         }
+        CronExpressionParser cronParser = new CronExpressionParser(args[0]);
 
-        System.out.println(new CronExpressionParser(args[0]).toString());
+
+        System.out.println(cronParser.parse().toString());
     }
 
     private CronExpressionParser parse()
@@ -53,11 +55,11 @@ public class CronExpressionParser {
     }
 
     private String extractArguments(String[] fields, int startingIndex) {
-        String arguments = "";
+        StringBuilder arguments = new StringBuilder();
         for (int i = startingIndex; i < fields.length; i++) {
-            arguments += " " + fields[i];
+            arguments.append(" ").append(fields[i]);
         }
-        return arguments;
+        return arguments.toString();
     }
 
     public String toString() {
@@ -66,9 +68,9 @@ public class CronExpressionParser {
             if (this.fieldsMap.get(section) == null) {
                 continue;
             }
-            String displayString = this.displayString.getOrDefault(section, section);
+            String displayString = CronExpressionParser.displayString.getOrDefault(section, section);
             sb.append(String.format(displayString + " ".repeat(14 - displayString.length()) + "%s",
-                    this.fieldsMap.get(section).stream().map(i -> i.toString()).collect(
+                    this.fieldsMap.get(section).stream().map(Object::toString).collect(
                             Collectors.joining(" "))));
             sb.append("\n");
         }

@@ -3,15 +3,17 @@ package org.deliveroo.cronexpressionparser.selectors;
 import org.deliveroo.cronexpressionparser.fields.FieldBase;
 
 import java.util.stream.Collectors;
+import java.util.List;
+import java.util.stream.Stream;
 
-public class Values extends org.deliveroo.cronexpressionparser.selectors.Base {
+public class Values extends SelectorBase {
 
     public Values(FieldBase field) {
         super(field);
     }
 
     @Override
-    public java.util.List<Integer> generatePossibilities() {
+    public  List<Integer> generatePossibilities() {
         String[] lists = this.field.getExpression().split(",");
 
         if (lists.length != 2) {
@@ -19,10 +21,10 @@ public class Values extends org.deliveroo.cronexpressionparser.selectors.Base {
                     "Values does not have valid expression : " + this.field.getExpression());
         }
 
-        return java.util.List.of(lists).stream()
+        return Stream.of(lists)
                 .flatMap(l -> {
                     try {
-                        return org.deliveroo.cronexpressionparser.selectors.Base.get(new FieldBase(l) {
+                        return SelectorBase.get(new FieldBase(l) {
                             @Override
                             public Integer getMinimum() {
                                 return field.getMinimum();

@@ -4,7 +4,7 @@ import org.deliveroo.cronexpressionparser.fields.FieldBase;
 
 import java.util.List;
 
-public class Exact extends org.deliveroo.cronexpressionparser.selectors.Base {
+public class Exact extends SelectorBase {
 
     public Exact(FieldBase field) {
         super(field);

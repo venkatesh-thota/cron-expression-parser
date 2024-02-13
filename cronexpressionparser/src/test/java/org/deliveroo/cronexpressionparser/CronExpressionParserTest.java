@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class CronExpressionParserTest {
 
     @Test
-    public void testSimpleCronExpression()
+    public void testSampleCronExpression()
             throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
         assertEquals(new CronExpressionParser("*/15 0 1,5 * 1-5 /usr/bin/find").toString(), "minute        0 15 30 45\n"
                 + "hour          0\n"
@@ -23,13 +23,28 @@ public class CronExpressionParserTest {
     @Test
     public void testCronExpressionWithComplexLists()
             throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
-        assertEquals(new CronExpressionParser("*/15 0 1-5,1-15 * 1-5 /usr/bin/find").toString(), "minute        0 15 30 45\n"
+        assertEquals(new CronExpressionParser("*/15 0 1-5,1-15 * 1-5 /usr/bin/find").toString(),
+                "minute        0 15 30 45\n"
                 + "hour          0\n"
                 + "day of month  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15\n"
                 + "month         1 2 3 4 5 6 7 8 9 10 11 12\n"
                 + "day of week   1 2 3 4 5\n"
                 + "command       /usr/bin/find");
     }
+
+    @Test
+    public void testCronExpressionWithExactValue()
+            throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+        assertEquals(new CronExpressionParser("15 0 5 12 1-5 /usr/bin/find").toString(),
+                "minute        15\n"
+                        + "hour          0\n"
+                        + "day of month  5\n"
+                        + "month         12\n"
+                        + "day of week   1 2 3 4 5\n"
+                        + "command       /usr/bin/find");
+    }
+
+
 
     @Test
     public void testCronExpressionWithWrongStep() {

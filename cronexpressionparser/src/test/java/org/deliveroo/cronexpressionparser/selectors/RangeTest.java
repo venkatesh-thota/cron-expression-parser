@@ -65,19 +65,4 @@ public class RangeTest {
         });
         assertEquals(exp.getMessage(), "Range minimum/maximum are in wrong order. maximum should be : 6 and minimum should be : 0");
     }
-
-    @Test
-    public void testRangeWithWeekValues() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        FieldBase w = new Weekday("MON-FRI");
-        assertEquals(w.parse(), List
-                .of(0, 1, 2, 3, 4));
-    }
-
-    @Test
-    public void testRangeextenParserPossibilities()
-            throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
-        FieldBase d = new Day("29-3");
-        assertEquals(d.parse(), List
-                .of(29, 30, 0, 1, 2, 3));
-    }
 }

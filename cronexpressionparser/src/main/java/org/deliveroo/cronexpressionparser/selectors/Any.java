@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Any extends org.deliveroo.cronexpressionparser.selectors.Base {
+public class Any extends SelectorBase {
 
     public Any(FieldBase field) {
         super(field);
