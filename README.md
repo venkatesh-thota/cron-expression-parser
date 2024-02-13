@@ -6,7 +6,6 @@ The utility strictly conforms to the standardized cron layout, comprising five t
 
 Below illustrates how to employ the tool:
 
-ruby
 Copy code
 $ your-program "*/15 0 1,15 * 1-5 /usr/bin/find"
 # Instructions for Use
