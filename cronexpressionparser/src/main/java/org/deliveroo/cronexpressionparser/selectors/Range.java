@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Range extends SelectorBase {
 
@@ -15,7 +16,7 @@ public class Range extends SelectorBase {
 
     @Override
     public List<Integer> generatePossibilities() {
-        List<Integer> rangeLimits = List.of(this.field.getExpression().split("-")).stream()
+        List<Integer> rangeLimits = Stream.of(this.field.getExpression().split("-"))
                 .map(Integer::valueOf).collect(
                         Collectors.toList());
 
